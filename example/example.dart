@@ -41,11 +41,6 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            FanCarouselImageSlider(
-              imagesLink: sampleImages,
-              isAssets: false,
-              autoPlay: true,
-            ),
           ],
         ),
       ),

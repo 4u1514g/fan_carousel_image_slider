@@ -14,12 +14,7 @@ class SlideWidget extends StatelessWidget {
     required this.imageRadius,
     required this.sidesOpacity,
     required this.turns,
-    required this.currentItemShadow,
-    required this.sideItemsShadow,
-    required this.onSlideClick,
   });
-
-  final Function onSlideClick;
 
   final int index;
   final int actualIndex;
@@ -30,8 +25,6 @@ class SlideWidget extends StatelessWidget {
   final double imageRadius;
   final double sidesOpacity;
   final double turns;
-  final List<BoxShadow>? currentItemShadow;
-  final List<BoxShadow>? sideItemsShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +38,10 @@ class SlideWidget extends StatelessWidget {
             : const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(imageRadius),
-          boxShadow: _getSlideBoxShadow(index, actualIndex),
         ),
         child: AnimatedOpacity(
-          duration: sliderDuration,
-          opacity: (index == actualIndex) ? 1 : sidesOpacity,
-          child: InkWell(
-            onTap: () => onSlideClick(),
+            duration: sliderDuration,
+            opacity: (index == actualIndex) ? 1 : sidesOpacity,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(imageRadius),
@@ -62,19 +52,15 @@ class SlideWidget extends StatelessWidget {
                   fit: imageFitMode,
                 ),
               ),
-            ),
-          ),
+            )
         ),
       ),
     );
   }
 
-  List<BoxShadow>? _getSlideBoxShadow(index, actualIndex) =>
-      (index == actualIndex) ? currentItemShadow : sideItemsShadow;
-
   double _getSlideTurn(int currentIndex, actualCurrentIndex) => (currentIndex < actualCurrentIndex)
       ? -pi / turns
       : (currentIndex > actualCurrentIndex)
-          ? pi / turns
-          : 0;
+      ? pi / turns
+      : 0;
 }
